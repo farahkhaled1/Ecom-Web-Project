@@ -1,7 +1,92 @@
 <?php
-session_start();
+// Include config file
+require_once "config.php";
+ 
+// Define variables and initialize with empty values
+$name = $email = $link = $country =  "";
+$name_err = $email_err = $link_err = $country_err ="";
+ 
+// Processing form data when form is submitted
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+ 
+    // Validate name
+    if(empty(trim($_POST["name"]))){
+        $name_err = "Please enter a name.";
+    } elseif(!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["name"]))){
+        $name_err = "name can only contain letters, numbers, and underscores.";
+    } else{
+        // Prepare a select statement
+        $sql = "SELECT id FROM userr WHERE name = ?";
+        
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "s", $param_name);
+            
+            // Set parameters
+            $param_name = trim($_POST["name"]);
+            
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                /* store result */
+                mysqli_stmt_store_result($stmt);
+                
+                if(mysqli_stmt_num_rows($stmt) == 1){
+                    $name_err = "This name is already taken.";
+                } else{
+                    $name = trim($_POST["name"]);
+                }
+            } else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
 
+            // Close statement
+            mysqli_stmt_close($stmt);
+        }
+    }
+
+    //Validate email
+    if(empty(trim($_POST["email"]))){
+      $email_err = "Please enter an email";     
+     } else{
+      $email = trim($_POST["email"]);
+  }
+    
+    //validate link
+    
+    
+    // Check input errors before inserting in database
+    if(empty($name_err) && empty($email_err) && empty($link_err)){
+        
+        // Prepare an insert statement
+        $sql = "INSERT INTO userr (name,email,password) VALUES (?,?,?)";
+         
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "sss", $param_name, $param_email ,$param_password);
+            
+            // Set parameters
+            $param_name = $name;
+            $param_email = $email;
+            $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+            
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                // Redirect to login page
+                header("welcome.php");
+            } else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+
+            // Close statement
+            mysqli_stmt_close($stmt);
+        }
+    }
+    
+    // Close connection
+    mysqli_close($link);
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,7 +135,7 @@ session_start();
                             </div>
 
                             <div class="app-form-group">
-                                <input class="app-form-control" type="file" id="picture" name = "picture" placeholder="PICTURE" value=".$_SESSION['picture']."> </input>
+                                <input class="app-form-control" type="file" id="picture" name="picture" placeholder="PICTURE" value=".$_SESSION['picture']."> </input>
                             </div>
                             
                                 <div class="app-form-group">
@@ -326,7 +411,7 @@ session_start();
 
 
 
-<?php
+
 
 
 //  require_once "pages/config.php";
@@ -397,4 +482,3 @@ session_start();
 //   }
 // }
 
-?>
