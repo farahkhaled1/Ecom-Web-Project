@@ -4,22 +4,22 @@ session_start();
 ?>
 <html>
 <div class="container">
-  <form method = "POST" action="" enctype="multipart/form-data">
+  <form method="POST"  enctype="multipart/form-data">
 
     <label for="name"> Name</label>
     <input type="text" id="name" name="name" placeholder="Your name.."><br>
-    
+
     <label for="email">email</label>
     <input type="text" id="email" name="email" placeholder="Your email"><br>
 
     <label for="link">Recommend a new product</label>
     <input type="text" id="link" name="link" placeholder="Your link"><br>
 
-    <label for= "picture:"> picture 
-    <input type='file' name='picture' value=".$_SESSION['picture']."><br>
+    <label for="picture:"> picture
+      <input type='file' name='picture' value=".$_SESSION['picture']."><br>
 
-    <label for="country">Country</label>
-    <select id="country" name="country">
+      <label for="country">Country</label>
+      <select id="country" name="country">
         <option value="Afganistan">Afghanistan</option>
         <option value="Albania">Albania</option>
         <option value="Algeria">Algeria</option>
@@ -266,17 +266,18 @@ session_start();
         <option value="Zaire">Zaire</option>
         <option value="Zambia">Zambia</option>
         <option value="Zimbabwe">Zimbabwe</option>
-     </select><br>
+      </select><br>
 
-    <label for="suggestion">Subject</label>
-    <textarea id="suggestion" name="suggestion" placeholder="Write something.." style="height:200px"></textarea><br>
+      <label for="suggestion">Subject</label>
+      <textarea id="suggestion" name="suggestion" placeholder="Write something.." style="height:200px"></textarea><br>
 
- 
 
-    <input name = "submit" type="submit" value="submit" >
+
+      <input name="submit" type="submit" value="submit">
 
   </form>
 </div>
+
 </html>
 
 
@@ -292,85 +293,72 @@ $dbname = "glowglam";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
-if(!$conn)
-    {
-     echo "connecion failed: " . mysqli_connect_error();
-		}
-   
-$emailError=" ";
+if (!$conn) {
+  echo "connecion failed: " . mysqli_connect_error();
+}
 
-        // $mailTo="glowglam.info@gmail.com";
-        // $headers = "From: ".$email;
-        // $txt="You have received an email from ". $email.".\n\n".$suggestion;
-        // mail($mailTo, $txt, $headers);
-        // header("Location: index.php?mailsend");
+$emailError = " ";
 
+// $mailTo="glowglam.info@gmail.com";
+// $headers = "From: ".$email;
+// $txt="You have received an email from ". $email.".\n\n".$suggestion;
+// mail($mailTo, $txt, $headers);
+// header("Location: index.php?mailsend");
 
 
 
-    	if(empty($_POST['email']))
-    	{
-    		$emailError="email is required";
-    	}
 
-    	else
-    	{
+if (empty($_POST['email'])) {
+  $emailError = "email is required";
+} else {
 
-        if(isset($_POST['submit']))
-    { 
-      $target_dir="fff/";
-      $target_file=$target_dir. basename($_FILES["picture"]["name"]);
-      $uploadOk =1;
-      $imageFileType= strtolower(pathinfo ($target_file, PATHINFO_EXTENSION));
+  if (isset($_POST['submit'])) {
+    $target_dir = "suggestion/";
+    $target_file = $target_dir . basename($_FILES["picture"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-      if(file_exists($target_file)){
-        echo " sorry, your files already exists.";
-        $uploadOk= 0;
-      }
+    if (file_exists($target_file)) {
+      echo " sorry, your files already exists.";
+      $uploadOk = 0;
+    }
 
-      if($_FILES["picture"]["size"]>500000){
-        echo "sorry, your file is too large.";
-        $uploadOk= 0;
-      }
-      if($imageFileType!= "jpg" && $imageFileType!="png" && $imageFileType!= "jpeg" ){
-        echo "sorry, file type not allowed";
-      }
-      if($uploadOk==0){
-        echo "sorry, your file was not uploaded.";
-      }
-      else{
-        if(move_uploaded_file($_FILES["picture"]["tmp_name"], $target_file)){
-          echo "the file is uploaded";
-        }
-        else{
-          echo "error in uploading";
-        }
+    if ($_FILES["picture"]["size"] > 500000) {
+      echo "sorry, your file is too large.";
+      $uploadOk = 0;
+    }
+    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
+      echo "sorry, file type not allowed";
+    }
+    if ($uploadOk == 0) {
+      echo "sorry, your file was not uploaded.";
+    } else {
+      if (move_uploaded_file($_FILES["picture"]["tmp_name"], $target_file)) {
+        echo "the file is uploaded";
+      } else {
+        echo "error in uploading";
       }
     }
-  
-      $email=$_POST['email'];
-      $link= $_POST['link'];
-      //$picture= $_POST['picture'];
-      $country= $_POST['country'];
-      $suggestion= $_POST['suggestion'];
+  }
 
-      echo $email;
+  $email = $_POST['email'];
+  $link = $_POST['link'];
+  //$picture= $_POST['picture'];
+  $country = $_POST['country'];
+  $suggestion = $_POST['suggestion'];
+
+  echo $email;
 
 
-    		$sql= "INSERT INTO  suggestion(	email, link,picture, country, suggestion) values('".$_POST['email']."','".$_POST["link"]."','".$target_file."','".$_POST["country"]."','".$_POST["suggestion"]."')";
-    		$result = $conn->query($sql);
+  $sql = "INSERT INTO  suggestion(	email, link,picture, country, suggestion) values('" . $_POST['email'] . "','" . $_POST["link"] . "','" . $target_file . "','" . $_POST["country"] . "','" . $_POST["suggestion"] . "')";
+  $result = $conn->query($sql);
 
-    		if($result)	
-			{
-        echo " resulttttt";
-			//	header("Location:welcome.html");
-			}
-			else
+  if ($result) {
+    echo " resulttttt";
+    	header("Location:welcome.html");
+  } else {
+    echo $sql;
+  }
+}
 
-			{
-				echo $sql;
-      }
-      
-    }
-	
 ?>
