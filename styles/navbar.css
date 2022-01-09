@@ -1,0 +1,16 @@
+html {
+  top: 0;
+}
+
+.nav-item .nav-link {
+  color: white !important;
+}
+
+.navbar-brand img {
+  width: 18%;
+}
+
+.navbar-brand {
+  height: 74px;
+  width: 75%;
+}
