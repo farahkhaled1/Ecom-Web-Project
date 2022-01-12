@@ -61,3 +61,8 @@ body {
 .redirect:hover {
   color: #e97ca4;
 }
+
+#footer {
+  width: 165%;
+  margin-top: 100px;
+}
