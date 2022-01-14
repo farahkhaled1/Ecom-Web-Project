@@ -1,10 +1,10 @@
 <?php
 // Initialize the session
-session_start();
+// session_start();
 
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-    header("location: welcome.php");
+    header("location: ../admin/login.php");
     exit;
 }
 
@@ -118,7 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         ?>
 
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+        <form action="../admin/logincode.php" method="post">
             <div class="form-group">
                 <label>Username</label>
                 <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>">
@@ -130,7 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <span class="invalid-feedback"><?php echo $password_err; ?></span>
             </div>
             <div class="form-group btn-group">
-                <input type="submit" class="btn" value="Login" style="background-color: #e97ca4; color:white;">
+                <input type="submit" name="login_btn" class="btn" value="Login" style="background-color: #e97ca4; color:white;">
             </div>
             <p>Don't have an account? <a class="redirect" href="Signup.php">Sign up now</a>.</p>
         </form>

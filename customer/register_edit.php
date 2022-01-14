@@ -6,67 +6,65 @@ include('includes/navbar.php');
 
 <div class="container-fluid">
 
-<!--DataTales Example -->
-<div class="card shadow mb-4">
-  <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">EDIT customer Profile </h6>
-</div>
-    <div class="card-body">  
+    <!--DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">EDIT customer Profile </h6>
+        </div>
+        <div class="card-body">
 
-<?php
-$connection=mysqli_connect("localhost","root","","glowglam");
+            <?php
+            $connection = mysqli_connect("localhost", "root", "", "glowglam");
 
-  if(isset($_POST['edit_btn']))
-{
-    $id=$_POST['edit_id'];
+            if (isset($_POST['edit_btn'])) {
+                $id = $_POST['edit_id'];
 
-    $query="SELECT * FROM user WHERE id='$id'";
-    $query_run=mysqli_query($connection,$query);
+                $query = "SELECT * FROM userr WHERE id='$id'";
+                $query_run = mysqli_query($connection, $query);
 
-    foreach($query_run as $row)
-    {
-        ?>
+                foreach ($query_run as $row) {
+            ?>
 
-    <form action="code.php" method="POST">
+                    <form action="code.php" method="POST">
 
 
-        <div class="form-group">
-               
-                <input type="hidden" name="edit_id" value="<?php echo $row['id'] ?>" class="form-control" placeholder="Enter ID">
-            </div>
-            <div class="form-group">
-                <label> Name </label>
-                <input type="text" name="edit_name" value="<?php echo $row['name'] ?>" class="form-control" placeholder="Enter Name">
-            </div>
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" name="edit_email" value="<?php echo $row['email'] ?>" class="form-control" placeholder="Enter Email">
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" name="edit_password" value="<?php echo $row['password'] ?>" class="form-control" placeholder="Enter Password">
-            </div>
-             <div class="form-group">
-                <label>Upload Image</label>
-                <input type="file" name="userimage" value="<?php echo $row['picture'] ?>" class="form-control" >
-            </div>
-             <a href="register.php" class="btn btn-danger"> CANCEL </a>
-            <button type="submit" name="updatebtn" class="btn btn-primary"> Update </button>
+                        <div class="form-group">
 
-                    <?php
-    }
-}
-?>
-       
-   </div>
+                            <input type="hidden" name="edit_id" value="<?php echo $row['id'] ?>" class="form-control" placeholder="Enter ID">
+                        </div>
+                        <div class="form-group">
+                            <label> Name </label>
+                            <input type="text" name="edit_name" value="<?php echo $row['username'] ?>" class="form-control" placeholder="Enter Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" name="edit_email" value="<?php echo $row['email'] ?>" class="form-control" placeholder="Enter Email">
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" name="edit_password" value="<?php echo $row['password'] ?>" class="form-control" placeholder="Enter Password">
+                        </div>
+                        <div class="form-group">
+                            <label>Upload Image</label>
+                            <input type="file" name="userimage" value="<?php echo $row['picture'] ?>" class="form-control">
+                        </div>
+                        <a href="register.php" class="btn btn-danger"> CANCEL </a>
+                        <button type="submit" name="updatebtn" class="btn btn-primary"> Update </button>
 
-</div>
+                <?php
+                }
+            }
+                ?>
+
+        </div>
+
+    </div>
 </div>
 </div>
 
 
 
 <?php
-include ('includes/scripts.php');
+include('includes/scripts.php');
 include('includes/footer.php');
 ?>

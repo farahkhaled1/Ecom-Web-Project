@@ -8,6 +8,92 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles/Style.css">
     <title>Glow Glam | Ecommerce Website</title>
+
+    <style>
+        .footer {
+            background-color: #24262b;
+            padding: 70px 0;
+            width: 100%;
+            position: fixed 100%;
+        }
+
+        .footer-col {
+            width: 25%;
+            padding: 0 15px;
+        }
+
+        .footer-col h4 {
+            font-size: 18px;
+            color: #ffffff;
+            text-transform: capitalize;
+            margin-bottom: 35px;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .footer-col h4::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            background-color: #c23061;
+            height: 2px;
+            box-sizing: border-box;
+            width: 50px;
+        }
+
+        .footer-col ul li:not(:last-child) {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            font-size: 16px;
+            text-transform: capitalize;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 300;
+            color: #bbbbbb;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .footer-col ul li a:hover {
+            color: #ffffff;
+            padding-left: 8px;
+        }
+
+        .footer-col .social-links a {
+            display: inline-block;
+            height: 40px;
+            width: 40px;
+            background-color: rgba(255, 255, 255, 0.2);
+            margin: 0 10px 10px 0;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            color: #ffffff;
+            transition: all 0.5s ease;
+        }
+
+        .footer-col .social-links a:hover {
+            color: #24262b;
+            background-color: #ffffff;
+        }
+
+        /*responsive*/
+        @media (max-width: 767px) {
+            .footer-col {
+                width: 50%;
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 574px) {
+            .footer-col {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -15,22 +101,19 @@
     <body>
 
 
-
-        </div>
         <div class="header">
 
             <div class="container">
                 <div class="navbar">
                     <div class="logo">
-                        <a href="index.html"><img src="../images/logo.png" width="125px"></a>
+                        <a href="home.php"><img src="../images/logo.png" width="125px"></a>
                     </div>
 
                     <nav>
                         <ul>
-                            <li> <a class="nav-items" href=""> Home </a> </li>
-                            <li> <a class="nav-items" href=""> Products </a> </li>
-                            <li> <a class="nav-items" href=""> About </a> </li>
-                            <li> <a class="nav-items" href="http://localhost/Web-project/pages/contact.php"> Contact </a> </li>
+                            <li> <a class="nav-items" href="home.php"> Home </a> </li>
+                            <li> <a class="nav-items" href="../products/testingproducts.php"> Products </a> </li>
+                            <li> <a class="nav-items" href="about.php"> About </a> </li>
                             <li> <a class="nav-items" href="http://localhost/Web-project/pages/login.php"> Log in </a> </li>
                         </ul>
                     </nav>
@@ -40,7 +123,7 @@
                 <div class="col-2">
                     <h1> The Beauty Essentials <br> You Need </h1>
                     <p> Show up and steal the show <br> with an extra boost of confidence. </p>
-                    <a href="" class="btn">Shop Now! </a>
+                    <a href="../products/testingproducts.php" class="btn">Shop Now! </a>
                 </div>
                 <div class="col-2 img">
                     <img src="../images/pic9.png">
@@ -79,11 +162,44 @@
 
 
 
-            <div id="footer">
-                <?php
-                include "footer.html"
-                ?>
-            </div>
+            <footer class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="footer-col">
+                            <h4>company</h4>
+                            <ul>
+                                <li><a href="#">about us</a></li>
+                                <li><a href="#">our products</a></li>
+                                <li><a href="#">Contact us</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-col">
+                            <h4>get help</h4>
+                            <ul>
+                                <li><a href="#">FAQ</a></li>
+                                <li><a href="#">shipping</a></li>
+                                <li><a href="#">order status</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-col">
+                            <h4>online shop</h4>
+                            <ul>
+                                <li><a href="#">Perfumes</a></li>
+                                <li><a href="#">Cosmetics</a></li>
+                                <li><a href="#">Manicures</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-col">
+                            <h4>follow us</h4>
+                            <div class="social-links">
+                                <a href="https:\\www.facebook.com"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https:\\www.twitter.com"><i class="fab fa-twitter"></i></a>
+                                <a href="https:\\www.instagram.com"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </body>

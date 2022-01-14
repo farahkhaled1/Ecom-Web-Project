@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $username_err = "Username can only contain letters, numbers, and underscores.";
     } else {
         // Prepare a select statement
-        $sql = "SELECT id FROM testing WHERE name = ?";
+        $sql = "SELECT id FROM suggestion WHERE name = ?";
 
         if ($stmt = mysqli_prepare($link, $sql)) {
             // Bind variables to the prepared statement as parameters
@@ -87,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($username_err) && empty($email_err) && empty($linkk_err) && empty($country_err)) {
 
         // Prepare an insert statement
-        $sql = "INSERT INTO testing (name,email,link,country) VALUES (?,?,?,?)";
+        $sql = "INSERT INTO suggestion (name,email,link,country) VALUES (?,?,?,?)";
 
         if ($stmt = mysqli_prepare($link, $sql)) {
             // Bind variables to the prepared statement as parameters
@@ -132,7 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div id="navbar">
         <?php
-        include "../component/navbar.html"
+        include "../pages/navbar.html"
         ?>
     </div>
 
@@ -419,6 +419,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="submit" class="btn" value="Submit" style="background-color: #e97ca4; color:white;">
             </div>
         </form>
+    </div>
+
+    <div id="footer">
+        <?php
+        include "../pages/footer.html"
+        ?>
     </div>
 </body>
 
